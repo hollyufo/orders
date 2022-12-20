@@ -2,7 +2,6 @@ package com.example.demo.domain;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -15,7 +14,7 @@ public class OrderItem implements Serializable {
     // product
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Prodcut product;
+    private Product product;
     @NotNull
     private Integer quantity;
     @NotNull(message = "price is mandatory")
@@ -27,14 +26,14 @@ public class OrderItem implements Serializable {
     public OrderItem() {
     }
 
-    public OrderItem(Prodcut product, Integer quantity, Double price, Order order) {
+    public OrderItem(Product product, Integer quantity, Double price, Order order) {
         this.product = product;
         this.quantity = quantity;
         this.price = price;
         this.order = order;
     }
 
-    public Prodcut getRefProduct() {
+    public Product getRefProduct() {
         return this.product;
     }
 

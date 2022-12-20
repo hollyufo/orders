@@ -29,7 +29,10 @@ public class Order implements Serializable {
 
     @OneToMany(mappedBy = "order") @NotNull @NotEmpty @Valid
     private Set<OrderItem> orderItems = new HashSet<>();
-
+    // user
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     public Order(UUID uuid, LocalDateTime createdAt, Double totalPrice, @NotNull @NotEmpty Set<OrderItem> orderItems) {
         this.uuid = uuid;
         this.createdAt = createdAt;
