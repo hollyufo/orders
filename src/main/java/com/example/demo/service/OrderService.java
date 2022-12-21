@@ -30,4 +30,8 @@ public class OrderService {
         return order;
 
     }
+    // get all orders
+    public Iterable<Order> findAll() {
+        return orderRepository.findAll();
+    }
 }

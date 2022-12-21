@@ -22,6 +22,11 @@ public class CommandeResource {
     public Order save(@RequestBody @Valid Order order) {
         return orderService.save(order);
     }
+    // get all orders
+    @GetMapping("/")
+    public ResponseEntity<?> getAllOrders() {
+        return ResponseEntity.ok(orderService.findAll());
+    }
 
 
 }
