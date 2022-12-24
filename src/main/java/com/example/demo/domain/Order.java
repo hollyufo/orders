@@ -32,7 +32,7 @@ public class Order implements Serializable {
     // user
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private AppUser user;
     public Order(UUID uuid, LocalDateTime createdAt, Double totalPrice, @NotNull @NotEmpty Set<OrderItem> orderItems) {
         this.uuid = uuid;
         this.createdAt = createdAt;

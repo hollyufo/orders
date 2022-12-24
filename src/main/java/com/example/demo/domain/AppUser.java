@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Table(name = "user")
-public class User {
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;

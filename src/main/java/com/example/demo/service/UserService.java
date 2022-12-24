@@ -1,10 +1,14 @@
 package com.example.demo.service;
 
-import com.example.demo.domain.User;
+import com.example.demo.domain.AppUser;
 import com.example.demo.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -12,25 +16,26 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User saveUser(User user) {
+    public AppUser saveUser(AppUser user) {
         return userRepository.save(user);
     }
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public UserDetails findByEmail(String email) {
+        AppUser user = userRepository.findByEmail(email);
+        return new User(user.getEmail(), user.getPassword(), Collections.singleton(new SimpleGrantedAuthority(user.getRole())));
     }
-    public User findById(Long id) {
+    public AppUser findById(Long id) {
         return userRepository.findById(id).get();
     }
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
-    public List<User> findAll() {
+    public List<AppUser> findAll() {
         return userRepository.findAll();
     }
-    public User findByName(String name) {
+    public AppUser findByName(String name) {
         return userRepository.findByName(name);
     }
-    public List<User> findByRole(String role) {
+    public List<AppUser> findByRole(String role) {
         return userRepository.findByRole(role);
     }
 }
