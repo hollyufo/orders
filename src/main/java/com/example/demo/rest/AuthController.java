@@ -1,8 +1,10 @@
 package com.example.demo.rest;
 
 
+import com.example.demo.config.JWTGenerator;
 import com.example.demo.domain.AppUser;
 import com.example.demo.domain.Role;
+import com.example.demo.dto.AuthResponseDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.SignupDto;
 import com.example.demo.repository.RolesRepository;
@@ -33,6 +35,8 @@ public class AuthController {
     private UserService userService;
     private RolesRepository rolesRepository;
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JWTGenerator jwtGenerator;
 
     @Autowired
     public AuthController(AuthenticationManager authenticationManager, UserService userService, RolesRepository rolesRepository, PasswordEncoder passwordEncoder) {
@@ -61,12 +65,13 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<String> signin(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<AuthResponseDto> signin(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("User logged in successfully", HttpStatus.OK);
+        String token = jwtGenerator.generatetoken(authentication);
+        return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
     }
 
 }
