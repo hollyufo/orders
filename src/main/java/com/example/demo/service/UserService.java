@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -19,9 +20,9 @@ public class UserService {
     public AppUser saveUser(AppUser user) {
         return userRepository.save(user);
     }
-    public UserDetails findByEmail(String email) {
-        AppUser user = userRepository.findByEmail(email);
-        return new User(user.getEmail(), user.getPassword(), Collections.singleton(new SimpleGrantedAuthority(user.getRole())));
+
+    Optional<AppUser> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
     public AppUser findById(Long id) {
         return userRepository.findById(id).get();

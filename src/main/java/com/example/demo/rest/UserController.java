@@ -24,20 +24,7 @@ public class UserController {
     public AppUser register(@RequestBody AppUser appUser) {
         return userService.saveUser(appUser);
     }
-    @PostMapping("/login")
-    public String login(@RequestBody AppUser appUser) {
-         try {
-             authenticationManager.authenticate(
-                     new UsernamePasswordAuthenticationToken(appUser.getEmail(), appUser.getPassword())
-             );
-             UserDetails userDetails = userService.findByEmail(appUser.getEmail());
-             if (userDetails != null) {
-                 response.setHeader("Authorization", jwtUtils.generateToken(userDetails));
-             }
-         } catch (Exception e) {
-             throw new RuntimeException("Invalid username or password");
-         }
-    }
+
 
 
 
