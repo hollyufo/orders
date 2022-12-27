@@ -1,6 +1,5 @@
 package com.example.demo.rest;
 
-import com.example.demo.config.JwtUtils;
 import com.example.demo.domain.AppUser;
 import com.example.demo.service.UserService;
 import lombok.AllArgsConstructor;
@@ -17,8 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final JwtUtils jwtUtils;
-    private final AuthenticationManager authenticationManager;
 
     @PostMapping("/Register")
     public AppUser register(@RequestBody AppUser appUser) {

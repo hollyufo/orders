@@ -36,7 +36,8 @@ public class UserService {
     public AppUser findByName(String name) {
         return userRepository.findByName(name);
     }
-    public List<AppUser> findByRole(String role) {
-        return userRepository.findByRole(role);
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
+
 }

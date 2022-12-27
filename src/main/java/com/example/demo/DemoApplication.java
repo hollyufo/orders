@@ -15,11 +15,5 @@ public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
-    @Bean
-    CommandLineRunner runner(UserService userService) {
-        return args -> {
-            userService.saveUser(new AppUser(null ,"John", "test@gmail.com", "1234", "USER"));
-            userService.saveUser(new AppUser(null ,"Tom", "pakha@gmail.com", "1234", "Suplier"));
-        };
-    }
+
 }
