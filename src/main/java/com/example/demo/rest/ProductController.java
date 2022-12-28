@@ -5,6 +5,7 @@ import com.example.demo.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ProductController {
 
     // get all products
     @GetMapping("/")
+    @PostAuthorize("hasRole('ROLE_ADMIN')")
     public List<Product> getAllProducts() {
         return productService.findAll();
     }

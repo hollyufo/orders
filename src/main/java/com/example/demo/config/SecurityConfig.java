@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 // seeting so only the admin can access the products page
-                //.antMatchers("/api/products/**").hasAnyRole("ADMIN")
+                //.antMatchers("/api/products/**").hasAnyRole("ROLE_ADMIN")
                 .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthentificationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
