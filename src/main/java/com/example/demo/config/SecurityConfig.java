@@ -41,9 +41,9 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .anyRequest().permitAll()
-                .and()
-                .httpBasic();
+                // seeting so only the admin can access the products page
+                //.antMatchers("/api/products/**").hasAnyRole("ADMIN")
+                .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthentificationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

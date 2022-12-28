@@ -58,6 +58,7 @@ public class AuthController {
         user.setName(signupDto.getName());
 
         Role role = rolesRepository.findByName(signupDto.getRolename());
+        // casting to list
         user.setRoles(Collections.singletonList(role));
 
         userService.saveUser(user);

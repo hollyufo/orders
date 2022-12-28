@@ -28,11 +28,15 @@ public class JWTAuthentificationFilter extends OncePerRequestFilter {
             String username = tokenGenerator.getUsernameFromJWT(token);
 
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null,
                     userDetails.getAuthorities());
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            System.out.println("authenticationToken");
+            System.out.println(authenticationToken);
         }
+
         filterChain.doFilter(request, response);
     }
 
